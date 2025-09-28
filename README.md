@@ -30,25 +30,14 @@
 ## 必要套件
 - Python 3.8+
 - torch, torchvision, numpy, matplotlib, scikit-learn
-- 建議建立虛擬環境（Windows 範例）：
-  - python -m venv .venv
-  - .venv\Scripts\activate
-  - pip install -r requirements.txt
-  - 或：pip install torch torchvision numpy matplotlib scikit-learn
 
 ## 資料準備
 1. 先執行 preclassify.py
    - 目的：使用預訓練分類器對影像做快速判斷或推論，輸出每張影像的分類機率（cls_prob）或其他輔助資訊，用於後續的 sampling 加權或難樣本提升。
-   - 範例（專案根目錄）：
-     - .venv\Scripts\activate
-     - python preclassify.py
-   - 輸出：通常會產生含 cls_prob 的中間資料或 JSON 檔（視程式實作）。
+   - 輸出：通常會產生含 cls_prob 的中間資料或 JSON 檔。
 
 2. 再執行 preparing_data.py
    - 目的：整理/驗證原始影像與遮罩，建立 meta JSON（dataset list），計算 has_pnx、strata（分層）、並將 preclassify 的 cls_prob 整合進來。
-   - 範例：
-     - .venv\Scripts\activate
-     - python preparing_data.py
    - 輸出：一個或多個 meta JSON（例如 `subset_data_YYYYMMDDHHMM.json`），以及可能的裁切後遮罩資料夾。train.py 以此 meta JSON 當作資料清單來源。
 
 meta JSON 範例（單一 entry）
